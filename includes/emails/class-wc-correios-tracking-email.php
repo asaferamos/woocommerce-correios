@@ -173,6 +173,9 @@ class WC_Correios_Tracking_Email extends WC_Email {
 
 			$this->find[]    = '{order_number}';
 			$this->replace[] = $order->get_order_number();
+			
+			$this->find[]    = '{customer_first_name}';
+			$this->replace[] = $order->get_billing_first_name();
 
 			$this->find[]    = '{date}';
 			$this->replace[] = date_i18n( wc_date_format(), time() );

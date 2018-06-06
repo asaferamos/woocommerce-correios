@@ -999,3 +999,11 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://claudiosanches.com"
 msgstr ""
+
+msgid "Order Dispatched"
+msgstr ""
+
+msgid "Order Dispatched <span class=\"count\">(%s)</span>"
+msgid_plural "Orders Dispatcheds <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""

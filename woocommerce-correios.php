@@ -33,6 +33,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+function register_dispatched_order_status() {
+    register_post_status( 'wc-order-dispatched', array(
+        'label'                     => __('Order Dispatched','woocommerce-correios'),
+        'public'                    => false,
+        'exclude_from_search'       => false,
+        'show_in_admin_all_list'    => false,
+        'show_in_admin_status_list' => true,
+        'label_count'               => _n_noop( "Order Dispatched <span class=\"count\">(%s)</span>", "Orders Dispatcheds <span class=\"count\">(%s)</span>", 'woocommerce-correios' )
+    ) );
+}
+add_action( 'init', 'register_dispatched_order_status' );
+
+// Add to list of WC Order statuses
+function add_dispatched_to_order_statuses( $order_statuses ) {
+
+    $new_order_statuses = array();
+
+    // add new order status after processing
+    foreach ( $order_statuses as $key => $status ) {
+
+        $new_order_statuses[ $key ] = $status;
+
+        if ( 'wc-processing' === $key ) {
+            $new_order_statuses['wc-order-dispatched'] = __('Order Dispatched','woocommerce-correios');
+        }
+    }
+
+    return $new_order_statuses;
+}
+add_filter( 'wc_order_statuses', 'add_dispatched_to_order_statuses' );
+
 define( 'WC_CORREIOS_VERSION', '3.7.1' );
 define( 'WC_CORREIOS_PLUGIN_FILE', __FILE__ );
 

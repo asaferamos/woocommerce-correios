@@ -198,7 +198,10 @@ function wc_correios_update_tracking_code( $order, $tracking_code, $remove = fal
 		// Add order note.
 		/* translators: %s: tracking code */
 		$order->add_order_note( sprintf( __( 'Added a Correios tracking code: %s', 'woocommerce-correios' ), $tracking_code ) );
-
+		
+		// Update status for order dispatched
+		$order->update_status( 'wc-order-dispatched' );
+		
 		// Send email notification.
 		wc_correios_trigger_tracking_code_email( $order, $tracking_code );
 
